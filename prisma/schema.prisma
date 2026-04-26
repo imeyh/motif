@@ -1,0 +1,100 @@
+// This is your Prisma schema file,
+// learn more about it in the docs: https://pris.ly/d/prisma-schema
+
+// Get a free hosted Postgres database in seconds: `npx create-db`
+
+// DB 설계도
+
+
+/*
+npx prisma generate 실행
+→ generated/prisma 폴더에 PrismaClient 생성
+→ TypeScript 코드에서 DB 조작 가능
+*/ 
+generator client {
+  provider = "prisma-client"
+  output   = "./generated/prisma"
+}
+
+datasource db {
+  provider = "sqlite"
+}
+
+enum Visibility {
+  DRAFT
+  PUBLIC
+}
+
+enum ItemType {
+  BOOK
+  MUSIC
+  FOOD
+  PLACE
+  LINK
+  OTHER
+}
+
+enum OrderStatus {
+  PENDING
+  PROCESSING
+  COMPLETED
+  CANCELED
+}
+
+model User {
+  id          String       @id @default(cuid())
+  name        String
+  bio         String?
+  collections Collection[]
+  createdAt   DateTime     @default(now())
+  updatedAt   DateTime     @updatedAt
+}
+
+model Collection {
+  id            String      @id @default(cuid())
+  ownerId       String
+  title         String
+  slug          String      @unique
+  coverImageUrl String?
+  intro         String?
+  outro         String?
+  visibility    Visibility  @default(DRAFT)
+  createdAt     DateTime    @default(now())
+  updatedAt     DateTime    @updatedAt
+
+  owner         User        @relation(fields: [ownerId], references: [id], onDelete: Cascade)
+  items         Item[]
+  orders        BookOrder[]
+}
+
+model Item {
+  id           String     @id @default(cuid())
+  collectionId String
+  type         ItemType   @default(OTHER)
+  title        String
+  note         String
+  sourceUrl    String?
+  imageUrl     String?
+  position     Int
+  createdAt    DateTime   @default(now())
+  updatedAt    DateTime   @updatedAt
+
+  collection   Collection @relation(fields: [collectionId], references: [id], onDelete: Cascade)
+
+  @@index([collectionId, position])
+}
+
+model BookOrder {
+  id            String       @id @default(cuid())
+  collectionId  String
+  status        OrderStatus  @default(PENDING)
+  requesterNote String?
+  snapshotJson  String
+  exportedAt    DateTime?
+  createdAt     DateTime     @default(now())
+  updatedAt     DateTime     @updatedAt
+
+  collection    Collection   @relation(fields: [collectionId], references: [id], onDelete: Cascade)
+
+  @@index([collectionId, createdAt])
+}
