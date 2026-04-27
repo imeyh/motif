@@ -12,9 +12,10 @@ export default async function CollectionDetailPage({
   params,
 }: CollectionDetailPageProps) {
   const { slug } = await params;
+  const decodedSlug = decodeURIComponent(slug);
 
   const collection = await prisma.collection.findUnique({
-    where: { slug },
+    where: { slug: decodedSlug },
     include: {
       items: {
         orderBy: { position: "asc" },
