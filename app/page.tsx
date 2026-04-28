@@ -19,7 +19,7 @@ export default async function Home() {
     include: {
       items: true,
     },
-    orderBy: {
+    orderBy: { 
       createdAt: "asc",
     },
   });
