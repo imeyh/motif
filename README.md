@@ -95,7 +95,6 @@ MOTIF는 콘텐츠의 기본 단위를 개별 포스트가 아니라 **컬렉션
 ### 실행 순서
 
 ```bash
-# 저장소 클론
 git clone https://github.com/imeyh/motif.git
 cd motif
 cp .env.example .env
