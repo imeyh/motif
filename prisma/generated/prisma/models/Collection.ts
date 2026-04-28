@@ -35,6 +35,7 @@ export type CollectionMinAggregateOutputType = {
   visibility: $Enums.Visibility | null
   createdAt: Date | null
   updatedAt: Date | null
+  deletedAt: Date | null
 }
 
 export type CollectionMaxAggregateOutputType = {
@@ -48,6 +49,7 @@ export type CollectionMaxAggregateOutputType = {
   visibility: $Enums.Visibility | null
   createdAt: Date | null
   updatedAt: Date | null
+  deletedAt: Date | null
 }
 
 export type CollectionCountAggregateOutputType = {
@@ -61,6 +63,7 @@ export type CollectionCountAggregateOutputType = {
   visibility: number
   createdAt: number
   updatedAt: number
+  deletedAt: number
   _all: number
 }
 
@@ -76,6 +79,7 @@ export type CollectionMinAggregateInputType = {
   visibility?: true
   createdAt?: true
   updatedAt?: true
+  deletedAt?: true
 }
 
 export type CollectionMaxAggregateInputType = {
@@ -89,6 +93,7 @@ export type CollectionMaxAggregateInputType = {
   visibility?: true
   createdAt?: true
   updatedAt?: true
+  deletedAt?: true
 }
 
 export type CollectionCountAggregateInputType = {
@@ -102,6 +107,7 @@ export type CollectionCountAggregateInputType = {
   visibility?: true
   createdAt?: true
   updatedAt?: true
+  deletedAt?: true
   _all?: true
 }
 
@@ -188,6 +194,7 @@ export type CollectionGroupByOutputType = {
   visibility: $Enums.Visibility
   createdAt: Date
   updatedAt: Date
+  deletedAt: Date | null
   _count: CollectionCountAggregateOutputType | null
   _min: CollectionMinAggregateOutputType | null
   _max: CollectionMaxAggregateOutputType | null
@@ -222,6 +229,7 @@ export type CollectionWhereInput = {
   visibility?: Prisma.EnumVisibilityFilter<"Collection"> | $Enums.Visibility
   createdAt?: Prisma.DateTimeFilter<"Collection"> | Date | string
   updatedAt?: Prisma.DateTimeFilter<"Collection"> | Date | string
+  deletedAt?: Prisma.DateTimeNullableFilter<"Collection"> | Date | string | null
   owner?: Prisma.XOR<Prisma.UserScalarRelationFilter, Prisma.UserWhereInput>
   items?: Prisma.ItemListRelationFilter
   orders?: Prisma.BookOrderListRelationFilter
@@ -238,6 +246,7 @@ export type CollectionOrderByWithRelationInput = {
   visibility?: Prisma.SortOrder
   createdAt?: Prisma.SortOrder
   updatedAt?: Prisma.SortOrder
+  deletedAt?: Prisma.SortOrderInput | Prisma.SortOrder
   owner?: Prisma.UserOrderByWithRelationInput
   items?: Prisma.ItemOrderByRelationAggregateInput
   orders?: Prisma.BookOrderOrderByRelationAggregateInput
@@ -257,6 +266,7 @@ export type CollectionWhereUniqueInput = Prisma.AtLeast<{
   visibility?: Prisma.EnumVisibilityFilter<"Collection"> | $Enums.Visibility
   createdAt?: Prisma.DateTimeFilter<"Collection"> | Date | string
   updatedAt?: Prisma.DateTimeFilter<"Collection"> | Date | string
+  deletedAt?: Prisma.DateTimeNullableFilter<"Collection"> | Date | string | null
   owner?: Prisma.XOR<Prisma.UserScalarRelationFilter, Prisma.UserWhereInput>
   items?: Prisma.ItemListRelationFilter
   orders?: Prisma.BookOrderListRelationFilter
@@ -273,6 +283,7 @@ export type CollectionOrderByWithAggregationInput = {
   visibility?: Prisma.SortOrder
   createdAt?: Prisma.SortOrder
   updatedAt?: Prisma.SortOrder
+  deletedAt?: Prisma.SortOrderInput | Prisma.SortOrder
   _count?: Prisma.CollectionCountOrderByAggregateInput
   _max?: Prisma.CollectionMaxOrderByAggregateInput
   _min?: Prisma.CollectionMinOrderByAggregateInput
@@ -292,6 +303,7 @@ export type CollectionScalarWhereWithAggregatesInput = {
   visibility?: Prisma.EnumVisibilityWithAggregatesFilter<"Collection"> | $Enums.Visibility
   createdAt?: Prisma.DateTimeWithAggregatesFilter<"Collection"> | Date | string
   updatedAt?: Prisma.DateTimeWithAggregatesFilter<"Collection"> | Date | string
+  deletedAt?: Prisma.DateTimeNullableWithAggregatesFilter<"Collection"> | Date | string | null
 }
 
 export type CollectionCreateInput = {
@@ -304,6 +316,7 @@ export type CollectionCreateInput = {
   visibility?: $Enums.Visibility
   createdAt?: Date | string
   updatedAt?: Date | string
+  deletedAt?: Date | string | null
   owner: Prisma.UserCreateNestedOneWithoutCollectionsInput
   items?: Prisma.ItemCreateNestedManyWithoutCollectionInput
   orders?: Prisma.BookOrderCreateNestedManyWithoutCollectionInput
@@ -320,6 +333,7 @@ export type CollectionUncheckedCreateInput = {
   visibility?: $Enums.Visibility
   createdAt?: Date | string
   updatedAt?: Date | string
+  deletedAt?: Date | string | null
   items?: Prisma.ItemUncheckedCreateNestedManyWithoutCollectionInput
   orders?: Prisma.BookOrderUncheckedCreateNestedManyWithoutCollectionInput
 }
@@ -334,6 +348,7 @@ export type CollectionUpdateInput = {
   visibility?: Prisma.EnumVisibilityFieldUpdateOperationsInput | $Enums.Visibility
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  deletedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   owner?: Prisma.UserUpdateOneRequiredWithoutCollectionsNestedInput
   items?: Prisma.ItemUpdateManyWithoutCollectionNestedInput
   orders?: Prisma.BookOrderUpdateManyWithoutCollectionNestedInput
@@ -350,6 +365,7 @@ export type CollectionUncheckedUpdateInput = {
   visibility?: Prisma.EnumVisibilityFieldUpdateOperationsInput | $Enums.Visibility
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  deletedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   items?: Prisma.ItemUncheckedUpdateManyWithoutCollectionNestedInput
   orders?: Prisma.BookOrderUncheckedUpdateManyWithoutCollectionNestedInput
 }
@@ -365,6 +381,7 @@ export type CollectionCreateManyInput = {
   visibility?: $Enums.Visibility
   createdAt?: Date | string
   updatedAt?: Date | string
+  deletedAt?: Date | string | null
 }
 
 export type CollectionUpdateManyMutationInput = {
@@ -377,6 +394,7 @@ export type CollectionUpdateManyMutationInput = {
   visibility?: Prisma.EnumVisibilityFieldUpdateOperationsInput | $Enums.Visibility
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  deletedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
 }
 
 export type CollectionUncheckedUpdateManyInput = {
@@ -390,6 +408,7 @@ export type CollectionUncheckedUpdateManyInput = {
   visibility?: Prisma.EnumVisibilityFieldUpdateOperationsInput | $Enums.Visibility
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  deletedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
 }
 
 export type CollectionListRelationFilter = {
@@ -413,6 +432,7 @@ export type CollectionCountOrderByAggregateInput = {
   visibility?: Prisma.SortOrder
   createdAt?: Prisma.SortOrder
   updatedAt?: Prisma.SortOrder
+  deletedAt?: Prisma.SortOrder
 }
 
 export type CollectionMaxOrderByAggregateInput = {
@@ -426,6 +446,7 @@ export type CollectionMaxOrderByAggregateInput = {
   visibility?: Prisma.SortOrder
   createdAt?: Prisma.SortOrder
   updatedAt?: Prisma.SortOrder
+  deletedAt?: Prisma.SortOrder
 }
 
 export type CollectionMinOrderByAggregateInput = {
@@ -439,6 +460,7 @@ export type CollectionMinOrderByAggregateInput = {
   visibility?: Prisma.SortOrder
   createdAt?: Prisma.SortOrder
   updatedAt?: Prisma.SortOrder
+  deletedAt?: Prisma.SortOrder
 }
 
 export type CollectionScalarRelationFilter = {
@@ -492,6 +514,10 @@ export type EnumVisibilityFieldUpdateOperationsInput = {
   set?: $Enums.Visibility
 }
 
+export type NullableDateTimeFieldUpdateOperationsInput = {
+  set?: Date | string | null
+}
+
 export type CollectionCreateNestedOneWithoutItemsInput = {
   create?: Prisma.XOR<Prisma.CollectionCreateWithoutItemsInput, Prisma.CollectionUncheckedCreateWithoutItemsInput>
   connectOrCreate?: Prisma.CollectionCreateOrConnectWithoutItemsInput
@@ -530,6 +556,7 @@ export type CollectionCreateWithoutOwnerInput = {
   visibility?: $Enums.Visibility
   createdAt?: Date | string
   updatedAt?: Date | string
+  deletedAt?: Date | string | null
   items?: Prisma.ItemCreateNestedManyWithoutCollectionInput
   orders?: Prisma.BookOrderCreateNestedManyWithoutCollectionInput
 }
@@ -544,6 +571,7 @@ export type CollectionUncheckedCreateWithoutOwnerInput = {
   visibility?: $Enums.Visibility
   createdAt?: Date | string
   updatedAt?: Date | string
+  deletedAt?: Date | string | null
   items?: Prisma.ItemUncheckedCreateNestedManyWithoutCollectionInput
   orders?: Prisma.BookOrderUncheckedCreateNestedManyWithoutCollectionInput
 }
@@ -587,6 +615,7 @@ export type CollectionScalarWhereInput = {
   visibility?: Prisma.EnumVisibilityFilter<"Collection"> | $Enums.Visibility
   createdAt?: Prisma.DateTimeFilter<"Collection"> | Date | string
   updatedAt?: Prisma.DateTimeFilter<"Collection"> | Date | string
+  deletedAt?: Prisma.DateTimeNullableFilter<"Collection"> | Date | string | null
 }
 
 export type CollectionCreateWithoutItemsInput = {
@@ -599,6 +628,7 @@ export type CollectionCreateWithoutItemsInput = {
   visibility?: $Enums.Visibility
   createdAt?: Date | string
   updatedAt?: Date | string
+  deletedAt?: Date | string | null
   owner: Prisma.UserCreateNestedOneWithoutCollectionsInput
   orders?: Prisma.BookOrderCreateNestedManyWithoutCollectionInput
 }
@@ -614,6 +644,7 @@ export type CollectionUncheckedCreateWithoutItemsInput = {
   visibility?: $Enums.Visibility
   createdAt?: Date | string
   updatedAt?: Date | string
+  deletedAt?: Date | string | null
   orders?: Prisma.BookOrderUncheckedCreateNestedManyWithoutCollectionInput
 }
 
@@ -643,6 +674,7 @@ export type CollectionUpdateWithoutItemsInput = {
   visibility?: Prisma.EnumVisibilityFieldUpdateOperationsInput | $Enums.Visibility
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  deletedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   owner?: Prisma.UserUpdateOneRequiredWithoutCollectionsNestedInput
   orders?: Prisma.BookOrderUpdateManyWithoutCollectionNestedInput
 }
@@ -658,6 +690,7 @@ export type CollectionUncheckedUpdateWithoutItemsInput = {
   visibility?: Prisma.EnumVisibilityFieldUpdateOperationsInput | $Enums.Visibility
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  deletedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   orders?: Prisma.BookOrderUncheckedUpdateManyWithoutCollectionNestedInput
 }
 
@@ -671,6 +704,7 @@ export type CollectionCreateWithoutOrdersInput = {
   visibility?: $Enums.Visibility
   createdAt?: Date | string
   updatedAt?: Date | string
+  deletedAt?: Date | string | null
   owner: Prisma.UserCreateNestedOneWithoutCollectionsInput
   items?: Prisma.ItemCreateNestedManyWithoutCollectionInput
 }
@@ -686,6 +720,7 @@ export type CollectionUncheckedCreateWithoutOrdersInput = {
   visibility?: $Enums.Visibility
   createdAt?: Date | string
   updatedAt?: Date | string
+  deletedAt?: Date | string | null
   items?: Prisma.ItemUncheckedCreateNestedManyWithoutCollectionInput
 }
 
@@ -715,6 +750,7 @@ export type CollectionUpdateWithoutOrdersInput = {
   visibility?: Prisma.EnumVisibilityFieldUpdateOperationsInput | $Enums.Visibility
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  deletedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   owner?: Prisma.UserUpdateOneRequiredWithoutCollectionsNestedInput
   items?: Prisma.ItemUpdateManyWithoutCollectionNestedInput
 }
@@ -730,6 +766,7 @@ export type CollectionUncheckedUpdateWithoutOrdersInput = {
   visibility?: Prisma.EnumVisibilityFieldUpdateOperationsInput | $Enums.Visibility
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  deletedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   items?: Prisma.ItemUncheckedUpdateManyWithoutCollectionNestedInput
 }
 
@@ -743,6 +780,7 @@ export type CollectionCreateManyOwnerInput = {
   visibility?: $Enums.Visibility
   createdAt?: Date | string
   updatedAt?: Date | string
+  deletedAt?: Date | string | null
 }
 
 export type CollectionUpdateWithoutOwnerInput = {
@@ -755,6 +793,7 @@ export type CollectionUpdateWithoutOwnerInput = {
   visibility?: Prisma.EnumVisibilityFieldUpdateOperationsInput | $Enums.Visibility
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  deletedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   items?: Prisma.ItemUpdateManyWithoutCollectionNestedInput
   orders?: Prisma.BookOrderUpdateManyWithoutCollectionNestedInput
 }
@@ -769,6 +808,7 @@ export type CollectionUncheckedUpdateWithoutOwnerInput = {
   visibility?: Prisma.EnumVisibilityFieldUpdateOperationsInput | $Enums.Visibility
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  deletedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   items?: Prisma.ItemUncheckedUpdateManyWithoutCollectionNestedInput
   orders?: Prisma.BookOrderUncheckedUpdateManyWithoutCollectionNestedInput
 }
@@ -783,6 +823,7 @@ export type CollectionUncheckedUpdateManyWithoutOwnerInput = {
   visibility?: Prisma.EnumVisibilityFieldUpdateOperationsInput | $Enums.Visibility
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  deletedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
 }
 
 
@@ -836,6 +877,7 @@ export type CollectionSelect<ExtArgs extends runtime.Types.Extensions.InternalAr
   visibility?: boolean
   createdAt?: boolean
   updatedAt?: boolean
+  deletedAt?: boolean
   owner?: boolean | Prisma.UserDefaultArgs<ExtArgs>
   items?: boolean | Prisma.Collection$itemsArgs<ExtArgs>
   orders?: boolean | Prisma.Collection$ordersArgs<ExtArgs>
@@ -853,6 +895,7 @@ export type CollectionSelectCreateManyAndReturn<ExtArgs extends runtime.Types.Ex
   visibility?: boolean
   createdAt?: boolean
   updatedAt?: boolean
+  deletedAt?: boolean
   owner?: boolean | Prisma.UserDefaultArgs<ExtArgs>
 }, ExtArgs["result"]["collection"]>
 
@@ -867,6 +910,7 @@ export type CollectionSelectUpdateManyAndReturn<ExtArgs extends runtime.Types.Ex
   visibility?: boolean
   createdAt?: boolean
   updatedAt?: boolean
+  deletedAt?: boolean
   owner?: boolean | Prisma.UserDefaultArgs<ExtArgs>
 }, ExtArgs["result"]["collection"]>
 
@@ -881,9 +925,10 @@ export type CollectionSelectScalar = {
   visibility?: boolean
   createdAt?: boolean
   updatedAt?: boolean
+  deletedAt?: boolean
 }
 
-export type CollectionOmit<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetOmit<"id" | "ownerId" | "title" | "slug" | "coverImageUrl" | "intro" | "outro" | "visibility" | "createdAt" | "updatedAt", ExtArgs["result"]["collection"]>
+export type CollectionOmit<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetOmit<"id" | "ownerId" | "title" | "slug" | "coverImageUrl" | "intro" | "outro" | "visibility" | "createdAt" | "updatedAt" | "deletedAt", ExtArgs["result"]["collection"]>
 export type CollectionInclude<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
   owner?: boolean | Prisma.UserDefaultArgs<ExtArgs>
   items?: boolean | Prisma.Collection$itemsArgs<ExtArgs>
@@ -915,6 +960,7 @@ export type $CollectionPayload<ExtArgs extends runtime.Types.Extensions.Internal
     visibility: $Enums.Visibility
     createdAt: Date
     updatedAt: Date
+    deletedAt: Date | null
   }, ExtArgs["result"]["collection"]>
   composites: {}
 }
@@ -1351,6 +1397,7 @@ export interface CollectionFieldRefs {
   readonly visibility: Prisma.FieldRef<"Collection", 'Visibility'>
   readonly createdAt: Prisma.FieldRef<"Collection", 'DateTime'>
   readonly updatedAt: Prisma.FieldRef<"Collection", 'DateTime'>
+  readonly deletedAt: Prisma.FieldRef<"Collection", 'DateTime'>
 }
     
 

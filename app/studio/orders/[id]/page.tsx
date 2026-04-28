@@ -48,13 +48,16 @@ export default async function OrderDetailPage({
     <main className="min-h-screen bg-[#f7f3ec] px-6 py-10 text-neutral-900">
       <header className="mx-auto mb-10 flex max-w-3xl items-center justify-between">
         <div>
-          <Link href="/studio" className="text-sm text-neutral-500 hover:text-black">
+          <Link
+            href="/studio"
+            className="text-sm text-neutral-500 hover:text-black"
+          >
             ← Studio
           </Link>
 
           <h1 className="mt-4 text-3xl font-semibold">주문 상세</h1>
           <p className="mt-2 text-sm text-neutral-500">
-            주문 시점에 저장된 컬렉션 snapshot을 확인합니다.
+            주문 시점에 확정된 컬렉션 내용을 확인합니다.
           </p>
         </div>
 
@@ -73,9 +76,7 @@ export default async function OrderDetailPage({
               <p className="text-sm tracking-[0.18em] text-neutral-500">
                 ORDER
               </p>
-              <h2 className="mt-2 text-2xl font-semibold">
-                {snapshot.title}
-              </h2>
+              <h2 className="mt-2 text-2xl font-semibold">{snapshot.title}</h2>
             </div>
 
             <span className="whitespace-nowrap text-sm tracking-[0.16em] text-neutral-500">
@@ -97,8 +98,12 @@ export default async function OrderDetailPage({
         </div>
 
         <div className="border border-neutral-300 bg-white/70 p-6">
-          <p className="mb-4 text-sm tracking-[0.18em] text-neutral-500">
-            STATUS ACTION
+          <p className="mb-2 text-sm tracking-[0.18em] text-neutral-500">
+            주문 처리 상태 관리
+          </p>
+
+          <p className="mb-4 text-sm text-neutral-500">
+            데모 환경에서는 Studio에서 주문 처리 상태를 직접 변경합니다.
           </p>
 
           <div className="flex flex-wrap gap-2">
@@ -108,7 +113,7 @@ export default async function OrderDetailPage({
                   <input type="hidden" name="orderId" value={order.id} />
                   <input type="hidden" name="nextStatus" value="PROCESSING" />
                   <button className="bg-neutral-900 px-4 py-2 text-sm text-white">
-                    PROCESSING으로 변경
+                    처리 시작
                   </button>
                 </form>
 
@@ -116,7 +121,7 @@ export default async function OrderDetailPage({
                   <input type="hidden" name="orderId" value={order.id} />
                   <input type="hidden" name="nextStatus" value="CANCELED" />
                   <button className="border border-neutral-300 px-4 py-2 text-sm text-neutral-700">
-                    CANCELED로 변경
+                    주문 취소
                   </button>
                 </form>
               </>
@@ -128,7 +133,7 @@ export default async function OrderDetailPage({
                   <input type="hidden" name="orderId" value={order.id} />
                   <input type="hidden" name="nextStatus" value="COMPLETED" />
                   <button className="bg-neutral-900 px-4 py-2 text-sm text-white">
-                    COMPLETED로 변경
+                    완료 처리
                   </button>
                 </form>
 
@@ -136,7 +141,7 @@ export default async function OrderDetailPage({
                   <input type="hidden" name="orderId" value={order.id} />
                   <input type="hidden" name="nextStatus" value="CANCELED" />
                   <button className="border border-neutral-300 px-4 py-2 text-sm text-neutral-700">
-                    CANCELED로 변경
+                    주문 취소
                   </button>
                 </form>
               </>

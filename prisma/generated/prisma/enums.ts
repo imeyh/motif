@@ -19,10 +19,10 @@ export type Visibility = (typeof Visibility)[keyof typeof Visibility]
 
 export const ItemType = {
   BOOK: 'BOOK',
+  MOVIE: 'MOVIE',
   MUSIC: 'MUSIC',
   FOOD: 'FOOD',
   PLACE: 'PLACE',
-  LINK: 'LINK',
   OTHER: 'OTHER'
 } as const
 

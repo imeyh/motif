@@ -45,7 +45,7 @@ export default async function CollectionDetailPage({
       <article className="mx-auto max-w-3xl">
         <section className="mb-14 pb-12">
           <p className="mb-4 text-sm tracking-[0.3em] text-neutral-500">
-            TASTE COLLECTION
+            MOTIF COLLECTION
           </p>
 
           <h1 className="text-4xl font-semibold leading-tight md:text-5xl">
@@ -120,7 +120,7 @@ export default async function CollectionDetailPage({
             href={`/studio/collections/${collection.id}/order`}
             className="rounded-full bg-neutral-900 px-6 py-3 text-sm font-medium text-white hover:bg-neutral-700"
           >
-            이 컬렉션으로 책 주문하기
+            이 컬렉션을 책으로 남기기
           </Link>
         </section>
       </article>

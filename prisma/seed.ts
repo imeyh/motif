@@ -14,37 +14,38 @@ async function main() {
     },
   });
 
-  // collection1 - 비 오는 날 생각나는 것들
+  // collection1 - 여름날 자주 듣는 노래
   await prisma.collection.create({
     data: {
       ownerId: user.id,
-      title: "비 오는 날 생각나는 것들",
-      slug: "rainy-day-things",
+      title: "어느 여름날의 나를 떠올리게 하는 노래들",
+      slug: "summer-song",
       coverImageUrl: "/samples/c1.jpg",
-      intro: "비 냄새를 맡고 빗소리를 들을 때 나는 무엇을 떠올릴까",
+      intro: "지금이 어떤 계절이든, 틀어두면 잠깐 여름에 머무는 느낌의 노래들.",
       outro: "",
       visibility: "PUBLIC",
       items: {
         create: [
           {
             type: "MUSIC",
-            title: "RADWIMPS - 愛にできることはまだあるかい",
-            note: "날씨의 아이 장면이 그대로 생각나는 노래",
-            imageUrl: "/samples/radwimps.jpg",
-            position: 2,
+            title: "소년달 - 잠들지 못하는 청춘들에게",
+            note: "이 노래를 들으면 여름밤 매미 소리가 들리는 것만 같아.",
+            imageUrl: "/samples/boyzmoon.jpg",
+            position: 1,
           },
           {
-            type: "FOOD",
-            title: "닭도리탕",
-            note: "비 오는 날엔 역시 얼큰한 맛과 흰 쌀밥이 생각난다.",
-            position: 3,
+            type: "MUSIC",
+            title: "Mrs. GREEN APPLE - 青と夏",
+            note: "일본의 청춘과 여름이 이 한 곡에 가득 ... 다녀보지도 않은 일본 고등학교 생활이 떠오른다",
+            imageUrl: "/samples/greenapple.jpg",
+            position: 2,
           },
           { 
-            type: "BOOK",
-            title: "날씨의 아이",
-            note: "빗소리를 들으면 날씨의 아이 n회차를 하고 싶어지는 법...",
-            imageUrl: "/samples/tenki2.jpg",
-            position: 1,
+            type: "MUSIC",
+            title: "RADWIMPS - Grand Escape",
+            note: "여름엔 역시 날씨의 아이 n회차 다시보기. 다시보고 나면 이 노래를 듣는 걸 안할 수가 없다.",
+            imageUrl: "/samples/tenki1.jpg",
+            position: 3,
           },
         ],
       },

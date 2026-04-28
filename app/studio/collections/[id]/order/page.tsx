@@ -39,7 +39,7 @@ export default async function OrderPage({ params }: OrderPageProps) {
 
         <h1 className="mt-4 text-3xl font-semibold">책 주문 생성</h1>
         <p className="mt-2 text-sm text-neutral-500">
-          완성한 컬렉션을 책 제작 주문 데이터로 저장합니다.
+          완성한 컬렉션을 책으로 남기기 위한 주문 기록을 만듭니다.
         </p>
       </header>
 

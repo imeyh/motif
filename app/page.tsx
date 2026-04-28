@@ -2,18 +2,19 @@ import Link from "next/link";
 import { prisma } from "@/lib/prisma";
 
 const cardBackgrounds = [
-  "bg-[#ede6db]",
-  "bg-[#e4e9e2]",
-  "bg-[#eee4e2]",
-  "bg-[#e3e6ef]",
-  "bg-[#ece7d6]",
-  "bg-[#e0e7e4]",
+  "bg-[#dfe3ea]",
+  "bg-[#e4e8e1]",
+  "bg-[#e9e2d8]",
+  "bg-[#f0e3dc]",
+  "bg-[#e6dde7]",
+  "bg-[#dde6e4]",
 ];
 
 export default async function Home() {
   const collections = await prisma.collection.findMany({
     where: {
       visibility: "PUBLIC",
+      deletedAt: null,
     },
     include: {
       items: true,
@@ -29,7 +30,7 @@ export default async function Home() {
         <div>
           <h1 className="text-2xl font-semibold tracking-wide">MOTIF</h1>
           <p className="mt-2 text-sm text-neutral-500">
-            좋아하는 것을 주제형 컬렉션으로 묶고, 이유와 함께 남기는 서비스
+            취향의 조각을 모아, 나만의 주제로 엮는 아카이브 서비스
           </p>
         </div>
 
@@ -58,10 +59,10 @@ export default async function Home() {
                   <img
                     src={collection.coverImageUrl}
                     alt={collection.title}
-                    className="aspect-[4/5] w-full object-cover"
+                    className="aspect-4/5 w-full object-cover"
                   />
                 ) : (
-                  <div className="flex aspect-[4/5] w-full items-center justify-center bg-neutral-100 text-sm text-neutral-400">
+                  <div className="flex aspect-4/5 w-full items-center justify-center bg-neutral-100 text-sm text-neutral-400">
                     No Image
                   </div>
                 )}
@@ -74,8 +75,8 @@ export default async function Home() {
 
                 <span className="text-neutral-400">|</span>
 
-                <span className="text-sm tracking-[0.12em] text-neutral-500">
-                  {collection.items.length}
+                <span className="shrink-0 whitespace-nowrap text-sm tracking-[0.12em] text-neutral-500">
+                  {collection.items.length}조각
                 </span>
               </div>
 
