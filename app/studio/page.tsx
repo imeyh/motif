@@ -2,6 +2,8 @@ import Link from "next/link";
 import { prisma } from "@/lib/prisma";
 import { deleteCollection } from "./actions";
 
+export const dynamic = "force-dynamic";
+
 type StudioPageProps = {
   searchParams: Promise<{
     message?: string;
@@ -61,7 +63,7 @@ export default async function StudioPage({ searchParams }: StudioPageProps) {
             href="/studio/collections/new"
             className="rounded-full bg-neutral-900 px-5 py-3 text-sm font-medium text-white hover:bg-neutral-700"
           >
-            새 컬렉션 시작하기
+            새 컬렉션 만들기
           </Link>
         </div>
       </header>

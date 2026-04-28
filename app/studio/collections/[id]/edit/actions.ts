@@ -4,14 +4,14 @@ import { prisma } from "@/lib/prisma";
 import { revalidatePath } from "next/cache";
 import { redirect } from "next/navigation";
 
-type ItemTypeValue = "BOOK" | "MUSIC" | "PLACE" | "LINK" | "FOOD" | "OTHER";
+type ItemTypeValue = "BOOK" | "MOVIE" | "MUSIC" | "FOOD" | "PLACE" | "OTHER";
 
 function normalizeItemType(type: string): ItemTypeValue {
   if (type === "BOOK") return "BOOK";
+  if (type === "MOVIE") return "MOVIE";
   if (type === "MUSIC") return "MUSIC";
-  if (type === "PLACE") return "PLACE";
-  if (type === "LINK") return "LINK";
   if (type === "FOOD") return "FOOD";
+  if (type === "PLACE") return "PLACE";
   return "OTHER";
 }
 

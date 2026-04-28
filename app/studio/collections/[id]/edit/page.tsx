@@ -1,6 +1,9 @@
 import Link from "next/link";
 import { notFound } from "next/navigation";
 import { prisma } from "@/lib/prisma";
+
+export const dynamic = "force-dynamic";
+
 import {
   addItem,
   deleteItem,
@@ -207,10 +210,10 @@ export default async function EditCollectionPage({
                 defaultValue="OTHER"
               >
                 <option value="BOOK">BOOK</option>
+                <option value="MUSIC">MOVIE</option>
                 <option value="MUSIC">MUSIC</option>
-                <option value="PLACE">PLACE</option>
-                <option value="LINK">LINK</option>
                 <option value="FOOD">FOOD</option>
+                <option value="PLACE">PLACE</option>
                 <option value="OTHER">OTHER</option>
               </select>
 

@@ -1,0 +1,9 @@
+services:
+  app:
+    build: .
+    ports:
+      - "${APP_PORT:-3000}:3000"
+    environment:
+      DATABASE_URL: "file:./dev.db"
+      NODE_ENV: production
+      NEXT_TELEMETRY_DISABLED: "1"

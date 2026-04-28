@@ -3,6 +3,8 @@ import { notFound } from "next/navigation";
 import { prisma } from "@/lib/prisma";
 import { createBookOrder } from "./actions";
 
+export const dynamic = "force-dynamic";
+
 type OrderPageProps = {
   params: Promise<{
     id: string;

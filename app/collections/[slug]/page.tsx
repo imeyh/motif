@@ -2,6 +2,8 @@ import Link from "next/link";
 import { notFound } from "next/navigation";
 import { prisma } from "@/lib/prisma";
 
+export const dynamic = "force-dynamic";
+
 type CollectionDetailPageProps = {
   params: Promise<{
     slug: string;
@@ -45,7 +47,7 @@ export default async function CollectionDetailPage({
         </Link>
       </header>
 
-      <article className="mx-auto max-w-3xl">
+      <article className="mx-auto max-w-3xl pb-24">
         <section className="mb-14 pb-12">
           <p className="mb-4 text-sm tracking-[0.3em] text-neutral-500">
             MOTIF COLLECTION
@@ -117,15 +119,6 @@ export default async function CollectionDetailPage({
             </p>
           </section>
         )}
-
-        <section className="mt-12 flex justify-center">
-          <Link
-            href={`/studio/collections/${collection.id}/order`}
-            className="rounded-full bg-neutral-900 px-6 py-3 text-sm font-medium text-white hover:bg-neutral-700"
-          >
-            이 컬렉션을 책으로 남기기
-          </Link>
-        </section>
       </article>
     </main>
   );
