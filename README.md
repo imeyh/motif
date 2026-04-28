@@ -31,7 +31,6 @@ MOTIF는 콘텐츠의 기본 단위를 개별 포스트가 아니라 **컬렉션
 #### 컬렉션 상세
 - 컬렉션 제목, 소개글, 아이템 목록, 마무리 글 조회
 - 아이템별 타입, 제목, 설명, 이미지, 링크 표시
-- 아이템 순서 기반 렌더링
 
 #### Studio
 - 컬렉션 목록 관리
@@ -49,7 +48,6 @@ MOTIF는 콘텐츠의 기본 단위를 개별 포스트가 아니라 **컬렉션
 - 컬렉션 삭제
   - 진행 중인 주문이 없는 컬렉션은 삭제 가능
   - PENDING / PROCESSING 주문이 있는 컬렉션은 삭제 불가
-  - 삭제는 hard delete가 아니라 soft delete 방식으로 처리
 
 ### Lv2. 자체 주문 기능
 
@@ -65,7 +63,7 @@ MOTIF는 콘텐츠의 기본 단위를 개별 포스트가 아니라 **컬렉션
 #### 주문 조회
 - 주문 목록 조회
 - 주문 상세 조회
-- 주문 당시의 컬렉션 데이터를 snapshot으로 확인
+- 주문 당시의 컬렉션 데이터 확인
 
 #### 주문 상태 관리
 - 주문 상태 관리
@@ -206,24 +204,17 @@ docker compose down
 
 ## 6. 기술 스택 선택 이유
 
-### Next.js
+### Next.js + TypeScript
 
-짧은 과제 기간 안에 화면과 서버 로직을 한 프로젝트 안에서 구현하기 위해 선택했습니다.
-App Router 기반으로 페이지 구조를 빠르게 잡을 수 있고, Server Actions를 통해 별도 API 라우트 없이 폼 제출과 DB 작업을 연결할 수 있어 생산성이 높다고 판단했습니다.
+짧은 과제 기간 안에 화면과 서버 로직을 하나의 프로젝트에서 구현하기 위해 Next.js를 선택했습니다. App Router 기반으로 페이지 구조를 빠르게 구성할 수 있고, Server Actions를 활용해 별도 API 라우트 없이 컬렉션 생성, 아이템 수정, 주문 생성 같은 폼 기반 작업을 처리할 수 있었습니다.
 
-### TypeScript
-
-데이터 모델과 화면 로직에서 타입 안정성을 확보하기 위해 사용했습니다.
-특히 Prisma Client와 함께 사용할 때 컬렉션, 아이템, 주문 데이터 구조를 더 안전하게 다룰 수 있었습니다.
+TypeScript는 Next.js 환경에서 함께 사용하면서, 컬렉션·아이템·주문·export 데이터처럼 여러 단계로 이어지는 데이터 구조를 코드에서 명확하게 다루는 데 활용했습니다.
 
 ### Prisma + SQLite
 
-과제 환경에서는 별도의 DB 서버를 운영하는 것보다, 파일 기반 DB인 SQLite가 더 적합하다고 판단했습니다.
+파일 기반 DB이기 때문에 Docker 환경에서도 추가 설정 없이 바로 실행 가능하고,
+seed 데이터를 통해 실행 직후 바로 서비스를 확인할 수 있는 점이 장점이라고 생각했습니다.
 Prisma를 사용해 데이터 모델을 명확하게 정의하고, 마이그레이션과 타입 기반 DB 접근을 관리했습니다.
-
-### Docker
-
-심사자가 별도 환경 설정 없이 애플리케이션을 실행할 수 있도록 Docker Compose 기반 실행 환경을 구성했습니다.
 
 ---
 
@@ -315,7 +306,7 @@ docker-compose.yml
 | 설계 | 데이터 모델 초안과 주문 흐름에 대한 의견을 참고 | Collection / Item / BookOrder 중심 구조로 단순화하고, 주문 데이터는 snapshot으로 저장하도록 결정 |
 | 구현 | Next.js App Router, Prisma, Server Actions 구현 방식 참고 | 실제 schema와 현재 코드 상태에 맞지 않는 제안은 제거하고, 동작 가능한 범위로 수정 |
 | 디버깅 | Prisma enum 타입 오류, slug 처리, soft delete 정책 등을 점검 | BookTemplate 컬럼을 추가하지 않고 template 값을 snapshotJson에 포함하는 방식으로 조정 |
-| Docker | Dockerfile, docker-compose.yml 구성 방향 참고 | Docker 실행 시 migration과 seed가 자동으로 동작하도록 제출 환경에 맞게 수정 |
+| Docker | Dockerfile, docker-compose.yml 구성 방향 참고 | |
 
 ---
 
