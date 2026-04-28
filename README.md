@@ -132,7 +132,7 @@ docker compose down
 
 ## 4. 완성한 레벨
 
-### 구현 완료: Lv1 + Lv2
+### 구현 완료: Lv1 + Lv2 + Lv3
 
 #### Lv1 서비스 구현
 
