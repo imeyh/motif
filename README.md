@@ -1,36 +1,365 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+## 1. 서비스 소개
 
-## Getting Started
+### 한 문장 소개
 
-First, run the development server:
+**주제에 따라 취향의 조각을 고르고, 선택의 이유를 남겨 하나의 컬렉션으로 완성하는 콘텐츠 서비스입니다.**
+
+### 타겟 사용자
+
+- 좋아하는 것을 단순 저장이 아니라 정리된 형태로 남기고 싶은 사용자
+- 시간순 게시글보다 주제별 아카이브로 자신을 표현하고 싶은 사용자
+- 하나의 컬렉션으로 자신의 취향을 공유하고 싶은 사용자
+
+### 기획 배경
+
+기존 서비스는 좋아하는 것을 저장하거나 짧게 공유하는 데는 강하지만, 왜 좋아하는지, 왜 이 항목들이 함께 묶이는지, 시간이 지나도 다시 꺼내볼 수 있는 구조로 남기는 데는 약하다고 생각했습니다.
+
+MOTIF는 주제별로 나를 남기는 서비스입니다.
+MOTIF는 콘텐츠의 기본 단위를 개별 포스트가 아니라 **컬렉션**으로 둡니다.  
+
+---
+
+## 2. 주요 기능
+
+### Lv1. 콘텐츠 서비스 구현
+
+#### 홈
+- 공개 상태의 컬렉션 목록 조회
+- 컬렉션 카드 클릭 시 상세 페이지 진입
+- 더미 데이터 기반으로 실행 직후 서비스 확인 가능
+
+#### 컬렉션 상세
+- 컬렉션 제목, 소개글, 아이템 목록, 마무리 글 조회
+- 아이템별 타입, 제목, 설명, 이미지, 링크 표시
+- 아이템 순서 기반 렌더링
+
+#### Studio
+- 컬렉션 목록 관리
+- 컬렉션 생성
+- 컬렉션 정보 수정
+  - 제목
+  - 커버 이미지 URL
+  - 소개글
+  - 마무리 글
+  - 공개 상태
+- 아이템 추가
+- 아이템 수정
+- 아이템 삭제
+- 아이템 순서 변경
+- 컬렉션 삭제
+  - 진행 중인 주문이 없는 컬렉션은 삭제 가능
+  - PENDING / PROCESSING 주문이 있는 컬렉션은 삭제 불가
+  - 삭제는 hard delete가 아니라 soft delete 방식으로 처리
+
+### Lv2. 자체 주문 기능
+
+#### 책 주문 생성
+- 컬렉션을 책 제작 주문 대상으로 선택
+- 템플릿 선택
+  - ESSAY
+  - LIST
+  - VISUAL
+- 요청 메모 입력
+- 아이템이 없는 컬렉션은 주문 불가
+
+#### 주문 조회
+- 주문 목록 조회
+- 주문 상세 조회
+- 주문 당시의 컬렉션 데이터를 snapshot으로 확인
+
+#### 주문 상태 관리
+- 주문 상태 관리
+  - PENDING
+  - PROCESSING
+  - COMPLETED
+  - CANCELED
+- 상태 전이 제한
+  - PENDING → PROCESSING / CANCELED
+  - PROCESSING → COMPLETED / CANCELED
+  - COMPLETED / CANCELED 이후에는 추가 변경 불가
+
+---
+
+## 3. 실행 방법
+
+### 요구 사항
+
+- Docker
+- Docker Compose
+
+### 실행 순서
 
 ```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
+# 저장소 클론
+git clone https://github.com/imeyh/motif.git
+
+# 프로젝트 폴더로 이동
+cd motif
+
+# 환경변수 파일 준비
+cp .env.example .env
+
+# Docker 실행
+docker compose up --build
+````
+
+실행 후 아래 주소로 접속합니다.
+
+```txt
+http://localhost:3000
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+### 포트 변경
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+기본 포트는 3000번입니다.
+포트 충돌이 발생하면 아래처럼 실행할 수 있습니다.
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+```bash
+APP_PORT=3001 docker compose up --build
+```
 
-## Learn More
+이 경우 접속 주소는 다음과 같습니다.
 
-To learn more about Next.js, take a look at the following resources:
+```txt
+http://localhost:3001
+```
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+### Docker 종료
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
+```bash
+docker compose down
+```
 
-## Deploy on Vercel
+---
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+## 4. 완성한 레벨
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+### 구현 완료: Lv1 + Lv2
+
+#### Lv1 서비스 구현
+
+기획한 콘텐츠 서비스의 핵심 플로우가 동작하도록 구현했습니다.
+
+구현한 내용:
+
+- 공개 컬렉션 목록 조회
+- 컬렉션 상세 조회
+- Studio에서 컬렉션 생성
+- 컬렉션 정보 수정
+- 아이템 추가 / 수정 / 삭제 / 순서 변경
+- 공개 / 비공개 상태 관리
+- 컬렉션 삭제 처리
+- 삭제된 컬렉션은 홈과 Studio에서 숨김 처리
+
+#### Lv2 자체 주문 기능
+
+컬렉션을 책 제작 주문으로 전환하는 흐름을 구현했습니다.
+
+구현한 내용:
+
+- 컬렉션 기반 책 주문 생성
+- 주문 목록 조회
+- 주문 상세 조회
+- 주문 상태 변경
+- 주문 시점의 컬렉션 데이터를 snapshotJson으로 저장
+- 주문 후 원본 컬렉션이 수정되어도 기존 주문 데이터는 유지
+
+### Lv3. 주문 데이터 익스포트
+
+주문 상세 페이지에서 JSON Export 기능을 제공합니다.
+
+구현한 내용:
+
+- 주문 1건에 대한 JSON export API 제공 (`/studio/orders/[id]/export`)
+- 브라우저에서 JSON 형태로 다운로드 가능
+- 주문 메타데이터 포함
+  - orderId
+  - status
+  - requesterNote
+  - createdAt
+- 주문 시점의 컬렉션 데이터를 snapshot 기반으로 포함
+  - title
+  - intro
+  - outro
+  - coverImageUrl
+  - contents (아이템 목록)
+- 가상의 파트너(sweetbook-mock)에게 전달 가능한 구조로 데이터 구성
+
+---
+
+## 5. 기술 스택
+
+### Frontend / Backend
+
+- Next.js
+- TypeScript
+
+### Database
+
+- SQLite
+- Prisma ORM
+
+### DevOps
+
+- Docker
+- Docker Compose
+
+---
+
+## 6. 기술 스택 선택 이유
+
+### Next.js
+
+짧은 과제 기간 안에 화면과 서버 로직을 한 프로젝트 안에서 구현하기 위해 선택했습니다.
+App Router 기반으로 페이지 구조를 빠르게 잡을 수 있고, Server Actions를 통해 별도 API 라우트 없이 폼 제출과 DB 작업을 연결할 수 있어 생산성이 높다고 판단했습니다.
+
+### TypeScript
+
+데이터 모델과 화면 로직에서 타입 안정성을 확보하기 위해 사용했습니다.
+특히 Prisma Client와 함께 사용할 때 컬렉션, 아이템, 주문 데이터 구조를 더 안전하게 다룰 수 있었습니다.
+
+### Prisma + SQLite
+
+과제 환경에서는 별도의 DB 서버를 운영하는 것보다, 파일 기반 DB인 SQLite가 더 적합하다고 판단했습니다.
+Prisma를 사용해 데이터 모델을 명확하게 정의하고, 마이그레이션과 타입 기반 DB 접근을 관리했습니다.
+
+### Docker
+
+심사자가 별도 환경 설정 없이 애플리케이션을 실행할 수 있도록 Docker Compose 기반 실행 환경을 구성했습니다.
+
+---
+
+## 7. 주요 디렉터리 구조
+
+```txt
+app/
+  page.tsx
+  collections/
+    [slug]/
+      page.tsx
+  studio/
+    page.tsx
+    actions.ts
+    collections/
+      new/
+        page.tsx
+        actions.ts
+      [id]/
+        edit/
+          page.tsx
+          actions.ts
+        order/
+          page.tsx
+          actions.ts
+    orders/
+      page.tsx
+      [id]/
+        page.tsx
+        actions.ts
+
+lib/
+  prisma.ts
+
+prisma/
+  schema.prisma
+  seed.ts
+
+public/
+  samples/
+
+Dockerfile
+docker-compose.yml
+.env.example
+```
+
+---
+
+## 8. 데이터 모델 요약
+
+### Collection
+
+컬렉션은 서비스의 핵심 콘텐츠 단위입니다. 
+사용자는 하나의 주제 아래 여러 아이템을 묶어 하나의 컬렉션을 구성합니다.
+
+역할:
+
+- 콘텐츠의 기본 단위
+- 사용자가 취향을 주제별로 정리하는 중심 구조
+
+### Item
+
+아이템은 컬렉션을 구성하는 개별 취향 항목입니다.  
+각 아이템은 단순 데이터가 아니라 “왜 좋아하는지”를 설명하는 note를 포함합니다.
+
+역할:
+
+- 컬렉션을 구성하는 콘텐츠 요소
+- position을 통해 순서를 가지며, 컬렉션의 흐름을 형성
+
+### BookOrder
+
+컬렉션을 책으로 만들기 위한 주문 데이터입니다.
+
+역할:
+
+- 컬렉션을 “결과물”로 전환하는 비즈니스 객체
+- 주문 생성 시점의 데이터를 snapshot으로 보존
+
+---
+
+## 9. AI 도구 사용 내역
+
+개발 과정에서 ChatGPT를 활용했습니다. 현재 프로젝트의 요구사항과 실제 schema, 동작 흐름에 맞는지 확인한 뒤 수정해서 반영했습니다.
+
+| 사용 단계 | AI 활용 내용 | 직접 판단하거나 수정한 부분 |
+| --- | --- | --- |
+| 기획 | 서비스 아이디어와 과제 요구사항을 비교하며 방향을 점검 | “책 서비스”가 아니라 “컬렉션 콘텐츠 서비스”가 본체가 되도록 범위를 조정 |
+| 설계 | 데이터 모델 초안과 주문 흐름에 대한 의견을 참고 | Collection / Item / BookOrder 중심 구조로 단순화하고, 주문 데이터는 snapshot으로 저장하도록 결정 |
+| 구현 | Next.js App Router, Prisma, Server Actions 구현 방식 참고 | 실제 schema와 현재 코드 상태에 맞지 않는 제안은 제거하고, 동작 가능한 범위로 수정 |
+| 디버깅 | Prisma enum 타입 오류, slug 처리, soft delete 정책 등을 점검 | BookTemplate 컬럼을 추가하지 않고 template 값을 snapshotJson에 포함하는 방식으로 조정 |
+| Docker | Dockerfile, docker-compose.yml 구성 방향 참고 | Docker 실행 시 migration과 seed가 자동으로 동작하도록 제출 환경에 맞게 수정 |
+
+---
+
+## 10. 설계 의도
+
+MOTIF는 좋아하는 것을 단순히 저장하는 서비스가 아니라, 사용자가 자신의 취향을 하나의 주제 아래 직접 편집해보는 서비스입니다.
+
+사람들은 음악, 음식, 장소, 글, 게임처럼 좋아하는 것들을 여러 서비스에 저장합니다. 하지만 시간이 지나면 그것들이 왜 좋았는지, 어떤 기준으로 함께 묶일 수 있는지는 쉽게 사라집니다. MOTIF는 이 흩어진 취향을 하나의 컬렉션으로 묶고, 각 아이템에 선택의 이유를 붙여 “내가 직접 편집한 취향의 결과물”로 남기는 데 집중했습니다.
+
+서비스 이름인 MOTIF는 반복되는 주제나 무늬를 의미합니다. 이 서비스에서 컬렉션은 단순한 목록이 아니라, 사용자의 취향 안에서 반복적으로 나타나는 결을 보여주는 하나의 무늬입니다.
+
+인스타그램이 순간을 보여주는 데 강하고, 핀터레스트가 이미지를 수집하는 데 강하며, 블로그가 시간순 기록에 강하다면, MOTIF는 “주제형 컬렉션”을 기본 단위로 삼아 좋아하는 것들을 다시 배열하고 설명하는 데 초점을 둡니다.
+
+책 주문 기능은 완성된 컬렉션을 다른 형태로 오래 남기기 위한 확장 기능입니다. 사용자가 만든 컬렉션이 충분히 완성된 콘텐츠라면, 그것을 한 권의 취향집처럼 보존할 수 있다고 보았습니다.
+
+---
+
+## 11. 사업적 가능성
+
+MOTIF의 초기 가치는 개인의 취향을 정리하고 공유하는 아카이브 도구에 있습니다. 사용자는 컬렉션 하나를 통해 자신이 좋아하는 것들을 단순히 나열하는 것이 아니라, 선택한 이유를 함께 보여줄 수 있습니다. 이 점에서 MOTIF의 컬렉션은 일반적인 저장 목록보다 완성된 콘텐츠에 가깝습니다.
+
+이 구조는 책 제작 기능과 자연스럽게 연결됩니다. 사용자가 만든 컬렉션은 이미 제목, 소개글, 아이템 순서, 아이템별 설명, 마무리 글을 가지고 있기 때문에, 이를 책이나 PDF, 카드형 아카이브 페이지로 변환하기 쉽습니다.
+
+초기에는 개인 취향 아카이브로 시작할 수 있고, 이후에는 다음과 같은 방향으로 확장할 수 있습니다.
+
+- 여행 후 방문한 장소를 묶은 여행 취향집
+- 자주 듣는 음악과 그 이유를 정리한 플레이리스트 북
+- 좋아하는 음식과 직접 만든 레시피를 묶은 음식 기록집
+- 친구나 연인에게 선물할 수 있는 개인 큐레이션 북
+- 특정 주제별 컬렉션 템플릿과 책 제작 주문
+
+MOTIF의 가능성은 사용자가 직접 작성한 컬렉션이 단순 데이터가 아니라, 구조화된 콘텐츠라는 점에 있습니다.
+
+---
+
+## 12. 더 시간이 있었다면 추가할 기능
+
+- 주문 데이터 JSON export 다운로드
+- 아이템 drag & drop 정렬
+- 컬렉션 공유 링크 복사
+- 이미지 업로드 기능
+- 컬렉션 템플릿
+- 책 미리보기 화면
+- 주문 상태별 필터
+- 사용자 인증 및 개인별 Studio 분리
