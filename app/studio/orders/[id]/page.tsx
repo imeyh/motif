@@ -63,12 +63,21 @@ export default async function OrderDetailPage({
           </p>
         </div>
 
-        <Link
-          href="/studio/orders"
-          className="border border-neutral-300 bg-white/70 px-4 py-2 text-sm hover:bg-white"
-        >
-          주문 목록
-        </Link>
+        <div className="flex gap-2">
+          <a
+            href={`/studio/orders/${order.id}/export`}
+            className="border border-neutral-300 bg-white/70 px-4 py-2 text-sm hover:bg-white"
+          >
+            JSON Export
+          </a>
+
+          <Link
+            href="/studio/orders"
+            className="border border-neutral-300 bg-white/70 px-4 py-2 text-sm hover:bg-white"
+          >
+            주문 목록
+          </Link>
+        </div>
       </header>
 
       <section className="mx-auto max-w-3xl space-y-6">
